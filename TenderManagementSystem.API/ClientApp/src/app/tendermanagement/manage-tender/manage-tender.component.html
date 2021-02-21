@@ -1,0 +1,67 @@
+<mat-card>
+    <mat-card-header class="header">
+        <mat-card-title class="header_title">{{ modalTitle }}</mat-card-title>
+    </mat-card-header>
+    <mat-card-content class="card_cntnt">
+        <div>
+            <form novalidate (ngSubmit)="onSubmit()" [formGroup]="tenderForm">
+
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <mat-form-field class="frm-ctrl">
+                                <input matInput placeholder="Tender Name" formControlName="name" />
+                                <mat-error *ngIf="tenderForm.controls['name'].errors?.required">
+                                    Tender Name is required!
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
+                        <div class="col-md-6">
+                            <mat-form-field class="frm-ctrl">
+                                <input matInput placeholder="Contract Number" formControlName="contractNumber" />
+                                <mat-error *ngIf="tenderForm.controls['contractNumber'].errors?.required">
+                                    Contract Number is required!
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-4">
+                            <mat-form-field class="frm-ctrl" appearance="fill">
+                                <mat-label>Choose a Release Date</mat-label>
+                                <input matInput [matDatepicker]="releasePicker" [min]="minDate" [max]="maxDate"
+                                    formControlName="releaseDate">
+                                <mat-datepicker-toggle matSuffix [for]="releasePicker"></mat-datepicker-toggle>
+                                <mat-datepicker #releasePicker></mat-datepicker>
+                            </mat-form-field>
+                        </div>
+                        <div class="col-md-4">
+                            <mat-form-field class="frm-ctrl" appearance="fill">
+                                <mat-label>Choose a Closing Date</mat-label>
+                                <input matInput [matDatepicker]="closingPicker" [min]="minDate" [max]="maxDate"
+                                    formControlName="closingDate">
+                                <mat-datepicker-toggle matSuffix [for]="closingPicker"></mat-datepicker-toggle>
+                                <mat-datepicker #closingPicker></mat-datepicker>
+                            </mat-form-field>
+                        </div>
+                        <div class="col-md-4">
+                            <mat-form-field class="frm-ctrl">
+                                <input matInput placeholder="Description" formControlName="description" />
+                            </mat-form-field>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="footer">
+                    <button color="warn" type="button" mat-raised-button (click)="dialogRef.close(false)">
+                        Cancel</button>
+                    <button type="submit" color="primary" [disabled]="tenderForm.invalid" mat-raised-button>
+                        {{ modalBtnTitle }}
+                    </button>
+                </div>
+
+            </form>
+        </div>
+    </mat-card-content>
+</mat-card>
